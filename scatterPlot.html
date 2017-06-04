@@ -28,9 +28,8 @@
 				width = 500 - margin.left - margin.right,
 				height = 500 - margin.top - margin.bottom,
 				radius = Math.min(width, height) / 2;
-			var paddingX = 50;
-			var paddingY = 30;
-			
+
+			// data
 			var dataset = [
 				[5, 17], [48, 90], [20, 18], [10, 3], [31, 17],
 				[41, 12], [40, 44]
@@ -88,7 +87,7 @@
 			   .attr("font-size", "15px");
 					
 			   
-			//Create X axis
+			// x axis
 			svg.append("g")
 				.attr("class", "axis")
 				.attr("transform", "translate(0," + (height - margin.left) + ")")
@@ -101,7 +100,7 @@
 				.attr("font-family", "sans-serif")
 			    .attr("font-size", "15px");
 			
-			//Create Y axis
+			// y axis
 			svg.append("g")
 				.attr("class", "axis")
 				.attr("transform", "translate(" + margin.left + ",0)")
