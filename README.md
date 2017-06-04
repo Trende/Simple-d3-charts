@@ -18,4 +18,4 @@
 ------
 ### Bar chart
 
-![image of simple d3 bar char](https://github.com/Trende/Simple-d3-charts/blob/master/img/barChart.PNG "Bar chart")
+![image of simple d3 bar char](https://github.com/Trende/Simple-d3-charts/blob/master/img/pieChart.PNG "Pie chart")
