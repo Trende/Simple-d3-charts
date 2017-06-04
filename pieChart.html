@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+	.arc text {
+	  font: 20px sans-serif;
+	  text-anchor: middle;
+	}
+
+	.arc path {
+	  stroke: #fff;
+	}
+
+</style>
+<svg width="960" height="500"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+	var margin = {top: 50, right: 20, bottom: 70, left: 40},
+		width = 500 - margin.left - margin.right,
+		height = 500 - margin.top - margin.bottom,
+		radius = Math.min(width, height) / 2;
+
+	var parseTime = d3.timeParse("%Y-%m");
+
+	var svg = d3.select("svg")
+		.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+	
+	// colors
+	var color = d3.scaleOrdinal(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+	var pie = d3.pie()
+		.sort(null)
+		.value(function(d) { return d.value; });
+
+	var path = d3.arc()
+		.outerRadius(radius - 10)
+		.innerRadius(0);
+
+	var label = d3.arc()
+		.outerRadius(radius - 60)
+		.innerRadius(radius - 60);
+
+
+	// read data
+	d3.csv("time-series.csv", function(error, data) {
+		if (error) throw error;
+
+		// format the data
+		data.forEach(function(d) {
+		  d.date = parseTime(d.date);
+		  d.value = +d.value;
+		});
+
+	var arc = svg.selectAll(".arc")
+		.data(pie(data))
+		.enter().append("g")
+		  .attr("class", "arc");
+
+	// color
+	arc.append("path")
+		  .attr("d", path)
+		  .attr("fill", function(d) { return color(d.data.date); });
+
+	// add labels 
+	arc.append("text")
+		  .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
+		  .attr("dy", "0.35em")
+		  .text(function(d) { return d.data.value; })
+		  .style("fill", "white");
+	});
+
+</script>
