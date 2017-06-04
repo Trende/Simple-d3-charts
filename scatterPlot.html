@@ -30,35 +30,36 @@
 			var paddingY = 30;
 			
 			var dataset = [
-							[5, 17], [48, 90], [20, 18], [10, 3], [31, 17],
-							[41, 12], [40, 44]];
+				[5, 17], [48, 90], [20, 18], [10, 3], [31, 17],
+				[41, 12], [40, 44]
+				];
 
 			// scale functions
 			var xScale = d3.scale.linear()
-								 .domain([0, d3.max(dataset, function(d) { return d[0]; })])
-								 .range([paddingX, w - paddingX * 2]);
+				.domain([0, d3.max(dataset, function(d) { return d[0]; })])
+				.range([paddingX, w - paddingX * 2]);
 
 			var yScale = d3.scale.linear()
-								 .domain([0, d3.max(dataset, function(d) { return d[1]; })])
-								 .range([h - paddingY, paddingY]);
+				.domain([0, d3.max(dataset, function(d) { return d[1]; })])
+				.range([h - paddingY, paddingY]);
 
 			// x axis
 			var xAxis = d3.svg.axis()
-							  .scale(xScale)
-							  .orient("bottom")
-							  .ticks(5);
+				.scale(xScale)
+				.orient("bottom")
+				.ticks(5);
 
 			// y axis
 			var yAxis = d3.svg.axis()
-							  .scale(yScale)
-							  .orient("left")
-							  .ticks(5);
+				.scale(yScale)
+				.orient("left")
+				.ticks(5);
 
 			// create SVG element
 			var svg = d3.select("body")
-						.append("svg")
-						.attr("width", w)
-						.attr("height", h);
+				.append("svg")
+				.attr("width", w)
+				.attr("height", h);
 
 			// add circles
 			svg.selectAll("circle")
