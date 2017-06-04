@@ -24,8 +24,10 @@
 		<script type="text/javascript">
 
 			// width and height of svg
-			var w = 500;
-			var h = 300;
+			var margin = {top: 50, right: 20, bottom: 70, left: 40},
+				width = 500 - margin.left - margin.right,
+				height = 500 - margin.top - margin.bottom,
+				radius = Math.min(width, height) / 2;
 			var paddingX = 50;
 			var paddingY = 30;
 			
@@ -37,11 +39,11 @@
 			// scale functions
 			var xScale = d3.scale.linear()
 				.domain([0, d3.max(dataset, function(d) { return d[0]; })])
-				.range([paddingX, w - paddingX * 2]);
+				.range([paddingX, width - margin.left * 2]);
 
 			var yScale = d3.scale.linear()
 				.domain([0, d3.max(dataset, function(d) { return d[1]; })])
-				.range([h - paddingY, paddingY]);
+				.range([height - margin.left, margin.left]);
 
 			// x axis
 			var xAxis = d3.svg.axis()
@@ -58,8 +60,8 @@
 			// create SVG element
 			var svg = d3.select("body")
 				.append("svg")
-				.attr("width", w)
-				.attr("height", h);
+				.attr("width", width)
+				.attr("height", height);
 
 			// add circles
 			svg.selectAll("circle")
@@ -77,8 +79,8 @@
 			   
 			// add title   
 			svg.append("text")
-			   .attr("x", (w/2) - paddingY)
-			   .attr("y", paddingY)
+			   .attr("x", (width/2) - margin.left)
+			   .attr("y", margin.left)
 			   .style("text-anchor", "middle")
 			   .style("text-decoration", "underline")
 			   .text("Title")
@@ -89,10 +91,10 @@
 			//Create X axis
 			svg.append("g")
 				.attr("class", "axis")
-				.attr("transform", "translate(0," + (h - paddingY) + ")")
+				.attr("transform", "translate(0," + (height - margin.left) + ")")
 				.call(xAxis)
 				.append("text")
-				.attr("x", (w / 2) - paddingY)
+				.attr("x", (width / 2) - margin.left)
 				.attr("y", 30)
 				.style("text-anchor", "middle")
 				.text("x axis label")
@@ -102,11 +104,11 @@
 			//Create Y axis
 			svg.append("g")
 				.attr("class", "axis")
-				.attr("transform", "translate(" + paddingX + ",0)")
+				.attr("transform", "translate(" + margin.left + ",0)")
 				.call(yAxis)
 				.append("text")
-				.attr("x", -h/2)
-				.attr("y", -paddingY)
+				.attr("x", - height/2)
+				.attr("y", - margin.left)
 				.style("text-anchor", "middle")
 				.text("y axis label")
 				.attr("font-family", "sans-serif")
