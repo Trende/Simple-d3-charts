@@ -16,9 +16,9 @@
 <script>
 
 	// set the dimensions and margins of the graph
-	var margin = {top: 50, right: 20, bottom: 30, left: 50},
+	var margin = {top: 50, right: 20, bottom: 70, left: 40},
 		width = 600 - margin.left - margin.right,
-		height = 300 - margin.top - margin.bottom;
+		height = 400 - margin.top - margin.bottom;
 
 	// parse the date / time
 	var parseTime = d3.timeParse("%Y-%m");
@@ -64,7 +64,7 @@
 		.attr("y", -10)
 		.style("text-anchor", "middle")
 		.style("text-decoration", "underline")
-		.text("Time-series line chart")
+		.text("Title")
 		.attr("font-family", "sans-serif")
 		.attr("font-size", "20px");
 		
@@ -73,25 +73,10 @@
 	  svg.append("g")
 		.attr("transform", "translate(0," + height + ")")
 		.call(d3.axisBottom(x))
-		.append("text")
-		.attr("x", 0)
-		.attr("y", 0)
-		.style("text-anchor", "middle")
-		.text("x axis label")
-		.attr("font-family", "sans-serif")
-		.attr("font-size", "15px");
 
 	  // add y axis
 	  svg.append("g")
 		.call(d3.axisLeft(y))
-		.append("text")
-		.attr("x", 0)
-		.attr("y", 0)
-		.style("text-anchor", "middle")
-		.text("y axis label")
-		.attr("font-family", "sans-serif")
-		.attr("font-size", "15px")
-		.attr("transform", "rotate(-90)");
 
 });
 
